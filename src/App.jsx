@@ -10,8 +10,7 @@ function App() {
   const [peopleData, setPeopleData] = useState([])
   const [filmsData, setFilmsData] = useState([])
   const [planetsData, setPlanetsData] = useState([])
-
-  const favList= ["grogu","mando"]
+  const [favList,setFavList]= useState(["(none)"])
 
   const peopleUrl = "https://swapi.dev/api/people/"
   const filmsUrl = "https://swapi.dev/api/films/"
@@ -47,20 +46,29 @@ function App() {
     }
   }
 
+
   useEffect(()=>{
     getPeopleData()
     getFilmsData()
     getPlanetsData()
   },[])
   
- function handleClick(name){
-    favList.push(name)
-    console.log(name)
+ function handleClick(ev){
+  const newList = [ev]
+  //  setFavList((prevfavList)=>[...prevfavList,newList])
+  setFavList((prevfavList)=>prevfavList.concat(newList))
  }
+
+ async function deleteElement(list,index) {
+  const newList = favList.filter((list, currentIndex) => index != currentIndex)
+  console.log(newList)
+  setFavList(newList)
+  console.log(newList.length)
+  }
 
   return (
     <>
-      <Navbar favList={favList}/>
+      <Navbar favList={favList} deleteElement={deleteElement}/>
       <div className='container-fluid'>
         <PeopleSection data={peopleData} category="Characters" handleClick={handleClick}/>
         <FilmsSection data={filmsData} category="Films" handleClick={handleClick}/>

@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 export function Navbar(props) {
+  const list = props.favList
+  console.log(list)
 
   return (
     <>
@@ -15,7 +17,15 @@ export function Navbar(props) {
             </button>
             <ul className="dropdown-menu dropdown-menu-end">
               {props.favList.map((list, index) =>(
-                <li key={index}><a className="dropdown-item" href="#">{list}</a></li>
+                <>
+                  <li key={index}><a className="dropdown-item" href="#">{list}</a>
+                    <i 
+                    className="x fa-solid fa-x"
+                    onClick={()=> props.deleteElement(list,index)}
+                      >
+                    </i>
+                  </li>
+                </>
               ))}
             </ul>
           </div>

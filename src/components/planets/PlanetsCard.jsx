@@ -1,5 +1,5 @@
 export function Card (props){
-    const {name,id,climate,population,terrain} = props
+    const {name,id,climate,population,terrain, handleClick} = props
 
     return(
         <div className="card">
@@ -24,7 +24,7 @@ export function Card (props){
                     <a href="..." className="btn btn-primary">Learn More!</a>
                     <button 
                     className="like btn btn-outline-danger"
-                    onClick={props.handleClick(props.name)}
+                    onClick={event => handleClick(name)}
                     >❤️</button>
                 </div>
             </div>
