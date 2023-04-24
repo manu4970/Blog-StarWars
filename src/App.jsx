@@ -16,7 +16,7 @@ function App() {
   const [planetsData, setPlanetsData] = useState([])
   const [favList,setFavList]= useState([])
   const [route,setRoute] = useState("/")
-  const [liked, setLiked] = useState(false)
+  const [liked,setLiked] = useState(false)
 
   const peopleUrl = "https://swapi.dev/api/people/"
   const filmsUrl = "https://swapi.dev/api/films/"
@@ -60,22 +60,16 @@ function App() {
     getPlanetsData()
   },[])
   
- function handleClickLike(name,id,category){
-  const newList = [name]
+function handleClickLike(name,id,category){
   const listPlusId = [{
     nombre: name,
     idu: id,
     categoria:category,
-    liked:false
   }]
   //  setFavList((prevfavList)=>[...prevfavList,newList])
   setFavList((prevfavList)=>prevfavList.concat(listPlusId))
-  if(liked=== false){
-    setLiked(true)
-  } else {
-    setLiked(false)
+  setLiked(!liked)
   }
- }
 
  async function deleteElement(list,index) {
   const newList = favList.filter((list, currentIndex) => index != currentIndex)

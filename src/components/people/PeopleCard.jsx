@@ -1,9 +1,9 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export function Card (props){
     const {name,url,hair,eye,gender,id,handleClickLike,handleClickLearnMore, category, liked} = props
 
-    console.log(liked)
 
     return(
         <div className="card">
@@ -15,15 +15,16 @@ export function Card (props){
                 <p className="card-text m-0 ">Eye color: {eye}</p>
                 <div className="mt-4">
                     <Link 
-                    to={(category)+"/"+(id+1)}
-                    className="btn btn-primary"
-                    onClick={event => handleClickLearnMore(id)}
-                    >Learn More!</Link>
+                        to={(category)+"/"+(id+1)}
+                        className="btn btn-primary"
+                        onClick={event => handleClickLearnMore(id)}
+                    >Learn More!
+                    </Link>
                     <button 
-                    className="like btn btn-outline-danger"
-                    onClick={event => handleClickLike(name,id,category)}
-                    >
-                    {liked ? <i className="fa-solid fa-heart"></i> : <i class="fa-regular fa-heart"></i>}</button>
+                        className="like btn btn-outline-danger"
+                        onClick={event => handleClickLike(name,id,category,liked)}
+                        >
+                    {liked ? <i className="fa-solid fa-heart"></i> : <i className="fa-regular fa-heart"></i>}</button>
                 </div>
             </div>
         </div>
