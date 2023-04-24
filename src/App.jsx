@@ -4,16 +4,19 @@ import { Navbar } from './components/Navbar'
 import { PeopleSection } from './components/people/PeopleSection'
 import { FilmsSection } from "./components/films/FilmsSection"
 import { PlanetsSection } from "./components/planets/PlanetsSection"
-import { LearnMore } from './components/learnMore/People'
-import { Route, Routes, Link , useParams} from 'react-router-dom'
+import { LearnMorePeople } from './components/learnMore/People'
+import { LearnMorePlanets } from './components/learnMore/Planets'
+import { Route, Routes } from 'react-router-dom'
+import { LearnMoreFilms } from './components/learnMore/Films'
 
 
 function App() {
   const [peopleData, setPeopleData] = useState([])
   const [filmsData, setFilmsData] = useState([])
   const [planetsData, setPlanetsData] = useState([])
-  const [favList,setFavList]= useState(["(none)"])
+  const [favList,setFavList]= useState([])
   const [route,setRoute] = useState("/")
+  const [liked, setLiked] = useState(false)
 
   const peopleUrl = "https://swapi.dev/api/people/"
   const filmsUrl = "https://swapi.dev/api/films/"
@@ -57,11 +60,21 @@ function App() {
     getPlanetsData()
   },[])
   
- function handleClickLike(name,id){
+ function handleClickLike(name,id,category){
   const newList = [name]
-  setRoute(id)
+  const listPlusId = [{
+    nombre: name,
+    idu: id,
+    categoria:category,
+    liked:false
+  }]
   //  setFavList((prevfavList)=>[...prevfavList,newList])
-  setFavList((prevfavList)=>prevfavList.concat(newList))
+  setFavList((prevfavList)=>prevfavList.concat(listPlusId))
+  if(liked=== false){
+    setLiked(true)
+  } else {
+    setLiked(false)
+  }
  }
 
  async function deleteElement(list,index) {
@@ -82,16 +95,28 @@ function App() {
       <Routes>
           <Route path="/" element={
             <div className='container-fluid'>
-              <PeopleSection data={peopleData} category="Characters" handleClickLearnMore={handleClickLearnMore} handleClickLike={handleClickLike}/>
-              <FilmsSection data={filmsData} category="Films" handleClickLearnMore={handleClickLearnMore} handleClickLike={handleClickLike}/>
-              <PlanetsSection data={planetsData} category="Planets" handleClickLearnMore={handleClickLearnMore} handleClickLike={handleClickLike}/>
+              <PeopleSection data={peopleData} liked={liked} category="character" handleClickLearnMore={handleClickLearnMore} handleClickLike={handleClickLike}/>
+              <FilmsSection data={filmsData} category="film" handleClickLearnMore={handleClickLearnMore} handleClickLike={handleClickLike}/>
+              <PlanetsSection data={planetsData} category="planet" handleClickLearnMore={handleClickLearnMore} handleClickLike={handleClickLike}/>
             </div>
           }
           />
           <Route 
           path="/character/:route"
           element={
-            <LearnMore/>
+            <LearnMorePeople routeId={route}/>
+          }
+          />
+          <Route 
+          path="/planet/:route"
+          element={
+            <LearnMorePlanets routeId={route}/>
+          }
+          />
+          <Route 
+          path="/film/:route"
+          element={
+            <LearnMoreFilms routeId={route}/>
           }
           />
       </Routes>

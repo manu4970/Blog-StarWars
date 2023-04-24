@@ -1,10 +1,9 @@
 import { useParams, Link } from "react-router-dom";
 
 export function Navbar(props) {
-  // todo: probar param para hacer ruta dinamica en fav navbar
-  const params = useParams()
-  console.log(params)
   
+  console.log(props.favList)
+
   return (
     <>
       <nav className="navbar bg-body-tertiary">
@@ -25,10 +24,10 @@ export function Navbar(props) {
               {props.favList.map((list, index) => (
                 <li key={index}>
                   <Link 
-                    to={"character/"} 
+                    to={(list.categoria)+"/"+(list.idu+1)} 
                     className="dropdown-item" 
                     href="#">
-                    {list}
+                    {list.nombre}
                   </Link>
                   <i
                     className="x fa-solid fa-x"

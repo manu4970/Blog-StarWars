@@ -1,12 +1,14 @@
+import { Link } from 'react-router-dom'
+
 export function Card (props){
-    const {name,id,climate,population,terrain, handleClick} = props
+    const {name,id,climate,population,terrain, handleClickLike ,handleClickLearnMore, category} = props
 
     return(
         <div className="card">
                 {(()=>{
                     if (props.id===0){
                         return(
-                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6d/Tatooine_%28fictional_desert_planet%29.jpg/220px-Tatooine_%28fictional_desert_planet%29.jpg" className="cardImg card-img-top" alt="..."/>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6d/Tatooine_%28fictional_desert_planet%29.jpg/220px-Tatooine_%28fictional_desert_planet%29.jpg" className="tatooine cardImg card-img-top" alt="..."/>
                         )
                         
                     }else {
@@ -21,10 +23,14 @@ export function Card (props){
                 <p className="card-text m-0 ">Terrain: {terrain}</p>
                 <p className="card-text m-0">Population: {population}</p>
                 <div className="mt-4">
-                    <a href="..." className="btn btn-primary">Learn More!</a>
+                    <Link 
+                    to={(category)+"/"+(id+1)}
+                    className="btn btn-primary"
+                    onClick={event => handleClickLearnMore(id)}
+                    >Learn More!</Link>
                     <button 
                     className="like btn btn-outline-danger"
-                    onClick={event => handleClick(name)}
+                    onClick={event => handleClickLike(name,id,category)}
                     >❤️</button>
                 </div>
             </div>

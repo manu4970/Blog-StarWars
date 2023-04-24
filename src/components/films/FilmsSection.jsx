@@ -7,7 +7,7 @@ export function FilmsSection(props) {
     <div className="row">
       <div className="col"></div>
       <div className="col-10 p-5">
-        <div className="fs-3 mb-3">{props.category}</div>
+        <div className="fs-3 mb-3">Films</div>
         <div className="overflow-x-scroll d-flex gap-4">
           {films?.results?.map((film, index) => (
             <Card
@@ -17,7 +17,9 @@ export function FilmsSection(props) {
               director={film.director}
               producer={film.producer}
               date={film.release_date}
-              handleClick={props.handleClickLike}
+              handleClickLike={props.handleClickLike}
+              handleClickLearnMore={props.handleClickLearnMore}
+              category={props.category}
             />
           ))}
         </div>

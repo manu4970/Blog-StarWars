@@ -7,7 +7,7 @@ export function PlanetsSection(props) {
     <div className="row">
       <div className="col"></div>
       <div className="col-10 p-5">
-        <div className="fs-3 mb-3">{props.category}</div>
+        <div className="fs-3 mb-3">Planets</div>
         <div className="overflow-x-scroll d-flex gap-4">
           {planets?.results?.map((planet, index) => (
             <Card
@@ -17,7 +17,9 @@ export function PlanetsSection(props) {
               climate={planet.climate}
               population={planet.population}
               terrain={planet.terrain}
-              handleClick={props.handleClickLike}
+              handleClickLike={props.handleClickLike}
+              handleClickLearnMore={props.handleClickLearnMore}
+              category={props.category}
             />
           ))}
         </div>

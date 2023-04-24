@@ -1,44 +1,36 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-export function LearnMorePeople(props) {
-  const [peopleData, setPeopleData] = useState([]);
+export function LearnMoreFilms(props) {
+  const [FilmsData, setFilmsData] = useState([]);
   const { route } = useParams();
 
-  async function getPeopleData() {
-    const response = await fetch("https://swapi.dev/api/people/" + route);
+  console.log(route)
+
+  async function getFilmsData() {
+    const response = await fetch("https://swapi.dev/api/films/" + route);
     if (response.ok) {
       const data = await response.json();
-      setPeopleData(data);
+      setFilmsData(data);
     } else {
-      console.log("Error al obtener people detail data");
+      console.log("Error al obtener Films detail data");
     }
   }
 
   useEffect(() => {
-    getPeopleData();
+    getFilmsData();
   }, [route]);
 
-  const char = peopleData;
-
-  console.log(char)
+  const film = FilmsData;
 
   return (
     <div className="container">
       <div className="contDetails d-flex mt-6 mb-5">
         <div className="charImg">
-          <img
-            src={
-              "https://starwars-visualguide.com/assets/img/characters/" +
-              route +
-              ".jpg"
-            }
-            className="cardImg card-img-top me-5"
-            alt="..."
-          />
+            <img src={"https://starwars-visualguide.com/assets/img/films/"+(route)+".jpg"} className="cardImg card-img-top me-5" alt="..."/>
         </div>
         <div>
-          <h1 className="mb-3">{char.name}</h1>
+          <h1 className="mb-3">{film.title}</h1>
           <p className="object-fit-contain" >
             Lorem ipsum dolor sit amet consectetur adipiscing elit, libero quam
             neque eget mi pharetra ultricies, augue sed scelerisque sem enim
@@ -58,14 +50,10 @@ export function LearnMorePeople(props) {
         </div>
       </div>
       <div className="charDetails d-flex gap-5 text-center justify-content-center">
-        
-        <p>Birth Year<br/>{char.birth_year}</p>
-        <p>Eye Color<br/>{char.eye_color}</p>
-        <p>Gender<br/>{char.gender}</p>
-        <p>Hair Color<br/>{char.hair_color}</p>
-        <p>Height<br/>{char.height}</p>
-        <p>Mass<br/>{char.mass}</p>
-        <p>Skin Color<br/>{char.skin_color}</p>
+        <p>Director<br/>{film.director}</p>
+        <p>Producer Period<br/>{film.producer}</p>
+        <p>Release Date<br/>{film.release_date}</p>
+        <p>Episode ID<br/>{film.episode_id}</p>
       </div>
     </div>
   );

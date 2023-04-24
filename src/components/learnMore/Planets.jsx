@@ -1,44 +1,47 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-export function LearnMorePeople(props) {
-  const [peopleData, setPeopleData] = useState([]);
+export function LearnMorePlanets(props) {
+  const [planetsData, setPlanetsData] = useState([]);
   const { route } = useParams();
 
-  async function getPeopleData() {
-    const response = await fetch("https://swapi.dev/api/people/" + route);
+  console.log(route)
+
+  async function getPlanetsData() {
+    const response = await fetch("https://swapi.dev/api/planets/" + route);
     if (response.ok) {
       const data = await response.json();
-      setPeopleData(data);
+      setPlanetsData(data);
     } else {
-      console.log("Error al obtener people detail data");
+      console.log("Error al obtener Planets detail data");
     }
   }
 
   useEffect(() => {
-    getPeopleData();
+    getPlanetsData();
   }, [route]);
 
-  const char = peopleData;
-
-  console.log(char)
+  const planet = planetsData;
 
   return (
     <div className="container">
       <div className="contDetails d-flex mt-6 mb-5">
         <div className="charImg">
-          <img
-            src={
-              "https://starwars-visualguide.com/assets/img/characters/" +
-              route +
-              ".jpg"
+          {(()=>{
+            if (planet.name==="Tatooine"){
+                return(
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6d/Tatooine_%28fictional_desert_planet%29.jpg/220px-Tatooine_%28fictional_desert_planet%29.jpg" className="tatooine cardImg card-img-top me-5" alt="..."/>
+                )
+                
+            }else {
+                return(
+                <img src={"https://starwars-visualguide.com/assets/img/planets/"+(route)+".jpg"} className="cardImgPlanet  card-img-top me-5" alt="..."/>
+                )
             }
-            className="cardImg card-img-top me-5"
-            alt="..."
-          />
+          })()}
         </div>
         <div>
-          <h1 className="mb-3">{char.name}</h1>
+          <h1 className="mb-3">{planet.name}</h1>
           <p className="object-fit-contain" >
             Lorem ipsum dolor sit amet consectetur adipiscing elit, libero quam
             neque eget mi pharetra ultricies, augue sed scelerisque sem enim
@@ -58,15 +61,15 @@ export function LearnMorePeople(props) {
         </div>
       </div>
       <div className="charDetails d-flex gap-5 text-center justify-content-center">
-        
-        <p>Birth Year<br/>{char.birth_year}</p>
-        <p>Eye Color<br/>{char.eye_color}</p>
-        <p>Gender<br/>{char.gender}</p>
-        <p>Hair Color<br/>{char.hair_color}</p>
-        <p>Height<br/>{char.height}</p>
-        <p>Mass<br/>{char.mass}</p>
-        <p>Skin Color<br/>{char.skin_color}</p>
+        <p>Rotation Period<br/>{planet.rotation_period}</p>
+        <p>Orbital Period<br/>{planet.orbital_period}</p>
+        <p>Diameter<br/>{planet.diameter}</p>
+        <p>Climate<br/>{planet.climate}</p>
+        <p>Gravity<br/>{planet.gravity}</p>
+        <p>Terrain<br/>{planet.terrain}</p>
+        <p>Population<br/>{planet.population}</p>
       </div>
     </div>
   );
 }
+
