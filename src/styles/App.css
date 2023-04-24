@@ -1,8 +1,3 @@
-/* .section {
-  margin-left: 200px;
-  margin-right: 200px;
-} */
-
 
 .card {
   min-width: 300px;
@@ -36,3 +31,13 @@ li {
   justify-content: center;
   padding-right: 12px;
 }
+
+.contDetails{
+  margin-top: 100px;
+}
+
+.cardImg{
+  height: 412px;
+  width: 300px;
+}
+

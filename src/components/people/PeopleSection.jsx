@@ -18,7 +18,8 @@ export function PeopleSection(props) {
               hair={person.hair_color}
               eye={person.eye_color}
               gender={person.gender}
-              handleClick={props.handleClick}
+              handleClickLike={props.handleClickLike}
+              handleClickLearnMore={props.handleClickLearnMore}
             />
             ))}
         </div>

@@ -17,7 +17,7 @@ export function PlanetsSection(props) {
               climate={planet.climate}
               population={planet.population}
               terrain={planet.terrain}
-              handleClick={props.handleClick}
+              handleClick={props.handleClickLike}
             />
           ))}
         </div>

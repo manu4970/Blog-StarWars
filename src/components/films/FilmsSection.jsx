@@ -17,7 +17,7 @@ export function FilmsSection(props) {
               director={film.director}
               producer={film.producer}
               date={film.release_date}
-              handleClick={props.handleClick}
+              handleClick={props.handleClickLike}
             />
           ))}
         </div>

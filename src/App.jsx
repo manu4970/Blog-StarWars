@@ -4,6 +4,8 @@ import { Navbar } from './components/Navbar'
 import { PeopleSection } from './components/people/PeopleSection'
 import { FilmsSection } from "./components/films/FilmsSection"
 import { PlanetsSection } from "./components/planets/PlanetsSection"
+import { LearnMore } from './components/learnMore/People'
+import { Route, Routes, Link , useParams} from 'react-router-dom'
 
 
 function App() {
@@ -11,10 +13,12 @@ function App() {
   const [filmsData, setFilmsData] = useState([])
   const [planetsData, setPlanetsData] = useState([])
   const [favList,setFavList]= useState(["(none)"])
+  const [route,setRoute] = useState("/")
 
   const peopleUrl = "https://swapi.dev/api/people/"
   const filmsUrl = "https://swapi.dev/api/films/"
   const planetsUrl = "https://swapi.dev/api/planets/"
+  
   
   async function getPeopleData () {
     const response = await fetch(peopleUrl)
@@ -53,27 +57,44 @@ function App() {
     getPlanetsData()
   },[])
   
- function handleClick(ev){
-  const newList = [ev]
+ function handleClickLike(name,id){
+  const newList = [name]
+  setRoute(id)
   //  setFavList((prevfavList)=>[...prevfavList,newList])
   setFavList((prevfavList)=>prevfavList.concat(newList))
  }
 
  async function deleteElement(list,index) {
   const newList = favList.filter((list, currentIndex) => index != currentIndex)
-  console.log(newList)
   setFavList(newList)
-  console.log(newList.length)
+  setRoute()
+
   }
+
+  function handleClickLearnMore(ev){
+    setRoute(ev)
+  }
+
 
   return (
     <>
-      <Navbar favList={favList} deleteElement={deleteElement}/>
-      <div className='container-fluid'>
-        <PeopleSection data={peopleData} category="Characters" handleClick={handleClick}/>
-        <FilmsSection data={filmsData} category="Films" handleClick={handleClick}/>
-        <PlanetsSection data={planetsData} category="Planets" handleClick={handleClick}/>
-      </div>
+      <Navbar  favList={favList} deleteElement={deleteElement} />
+      <Routes>
+          <Route path="/" element={
+            <div className='container-fluid'>
+              <PeopleSection data={peopleData} category="Characters" handleClickLearnMore={handleClickLearnMore} handleClickLike={handleClickLike}/>
+              <FilmsSection data={filmsData} category="Films" handleClickLearnMore={handleClickLearnMore} handleClickLike={handleClickLike}/>
+              <PlanetsSection data={planetsData} category="Planets" handleClickLearnMore={handleClickLearnMore} handleClickLike={handleClickLike}/>
+            </div>
+          }
+          />
+          <Route 
+          path="/character/:route"
+          element={
+            <LearnMore/>
+          }
+          />
+      </Routes>
     </>
   )
 }

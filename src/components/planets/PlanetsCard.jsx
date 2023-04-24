@@ -11,7 +11,7 @@ export function Card (props){
                         
                     }else {
                         return(
-                        <img src={"https://starwars-visualguide.com/assets/img/planets/"+(id+1)+".jpg"} className="cardImg card-img-top" alt="..."/>
+                        <img src={"https://starwars-visualguide.com/assets/img/planets/"+(id+1)+".jpg"} className="card-img-top" alt="..."/>
                         )
                     }
                 })()}

@@ -1,31 +1,40 @@
-import { useState } from "react";
+import { useParams, Link } from "react-router-dom";
 
 export function Navbar(props) {
-  const list = props.favList
-  console.log(list)
-
+  // todo: probar param para hacer ruta dinamica en fav navbar
+  const params = useParams()
+  console.log(params)
+  
   return (
     <>
       <nav className="navbar bg-body-tertiary">
         <div className="container-fluid">
-          <a className="navbar-brand fs-2 fw-bold" href="#">
+          <Link to="/" className="navbar-brand fs-2 fw-bold" >
             StarWars
-          </a>
+          </Link>
           <div className="btn-group">
-            <button type="button" className="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <button
+              type="button"
+              className="btn btn-primary dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
               Favoritos
             </button>
             <ul className="dropdown-menu dropdown-menu-end">
-              {props.favList.map((list, index) =>(
-                <>
-                  <li key={index}><a className="dropdown-item" href="#">{list}</a>
-                    <i 
+              {props.favList.map((list, index) => (
+                <li key={index}>
+                  <Link 
+                    to={"character/"} 
+                    className="dropdown-item" 
+                    href="#">
+                    {list}
+                  </Link>
+                  <i
                     className="x fa-solid fa-x"
-                    onClick={()=> props.deleteElement(list,index)}
-                      >
-                    </i>
-                  </li>
-                </>
+                    onClick={() => props.deleteElement(list, index)}
+                  ></i>
+                </li>
               ))}
             </ul>
           </div>
