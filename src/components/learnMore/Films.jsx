@@ -5,7 +5,6 @@ export function LearnMoreFilms(props) {
 	const [FilmsData, setFilmsData] = useState([])
 	const { route } = useParams()
 
-	console.log(route)
 
 	async function getFilmsData() {
 		const response = await fetch('https://swapi.dev/api/films/' + route)

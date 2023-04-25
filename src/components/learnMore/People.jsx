@@ -21,8 +21,6 @@ export function LearnMorePeople(props) {
 
 	const char = peopleData
 
-	console.log(char)
-
 	return (
 		<div className='container'>
 			<div className='contDetails d-flex mt-6 mb-5'>

@@ -1,7 +1,7 @@
-import { Card } from './FilmsCard';
+import { Card } from './FilmsCard'
 
 export function FilmsSection(props) {
-	const films = props.data;
+	const films = props.data
 
 	return (
 		<div className='row'>
@@ -26,5 +26,5 @@ export function FilmsSection(props) {
 			</div>
 			<div className='col'></div>
 		</div>
-	);
+	)
 }

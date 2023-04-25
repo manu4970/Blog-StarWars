@@ -6,7 +6,7 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'standard',
-    'prettier/@typescript-eslint'
+    'prettier/@javascript-eslint'
   ],
   overrides: [
   ],
