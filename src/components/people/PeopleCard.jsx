@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export function Card(props) {
@@ -12,7 +11,8 @@ export function Card(props) {
 		handleClickLike,
 		handleClickLearnMore,
 		category,
-		liked
+		liked,
+		deleteElement
 	} = props
 
 	return (
@@ -36,8 +36,8 @@ export function Card(props) {
 					</Link>
 					<button
 						className='like btn btn-outline-danger'
-						onClick={(event) => handleClickLike(name, id, category, liked)}>
-						{liked ? (
+						onClick={ liked ? (event) => handleClickLike(name, id, liked):(event)=> deleteElement(name,id)}>
+						{event ? (
 							<i className='fa-solid fa-heart'></i>
 						) : (
 							<i className='fa-regular fa-heart'></i>

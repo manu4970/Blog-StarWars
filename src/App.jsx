@@ -59,23 +59,23 @@ function App() {
 		getPlanetsData()
 	}, [])
 
-	function handleClickLike(name, id, category) {
+	function handleClickLike(name, id) {
 		const listPlusId = [
 			{
 				nombre: name,
 				idu: id,
-				categoria: category
+				liked:false
 			}
 		]
-		//  setFavList((prevfavList)=>[...prevfavList,newList])
 		setFavList((prevfavList) => prevfavList.concat(listPlusId))
 		setLiked(!liked)
+
 	}
 
-	async function deleteElement(list, index) {
+	function deleteElement(index) {
 		const newList = favList.filter((list, currentIndex) => index != currentIndex)
 		setFavList(newList)
-		setRoute()
+
 	}
 
 	function handleClickLearnMore(ev) {
@@ -96,6 +96,7 @@ function App() {
 								category='character'
 								handleClickLearnMore={handleClickLearnMore}
 								handleClickLike={handleClickLike}
+								deleteElement={deleteElement}
 							/>
 							<FilmsSection
 								data={filmsData}
@@ -121,3 +122,6 @@ function App() {
 }
 
 export default App
+
+
+		//  setFavList((prevfavList)=>[...prevfavList,newList])
