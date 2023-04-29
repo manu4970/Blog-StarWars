@@ -21,7 +21,8 @@ export function PeopleSection(props) {
 							handleClickLike={props.handleClickLike}
 							handleClickLearnMore={props.handleClickLearnMore}
 							category={props.category}
-							liked={props.liked}
+							deleteElement={props.deleteElement}
+							favlist={props.favlist}
 						/>
 					))}
 				</div>

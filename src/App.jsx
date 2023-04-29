@@ -17,7 +17,6 @@ function App() {
 	const [planetsData, setPlanetsData] = useState([])
 	const [favList, setFavList] = useState([])
 	const [route, setRoute] = useState('/')
-	const [liked, setLiked] = useState(false)
 
 	const peopleUrl = 'https://swapi.dev/api/people/'
 	const filmsUrl = 'https://swapi.dev/api/films/'
@@ -68,19 +67,21 @@ function App() {
 			}
 		]
 		setFavList((prevfavList) => prevfavList.concat(listPlusId))
-		setLiked(!liked)
 
+		listPlusId[0].liked = true
 	}
 
-	function deleteElement(index) {
-		const newList = favList.filter((list, currentIndex) => index != currentIndex)
-		setFavList(newList)
 
+	function deleteElement(name,id,liked) {
+		const newList = favList.filter((list, currentIndex) => id != currentIndex)
+		setFavList(newList)
+		console.log(newList)
 	}
 
 	function handleClickLearnMore(ev) {
 		setRoute(ev)
 	}
+
 
 	return (
 		<>
@@ -92,7 +93,7 @@ function App() {
 						<div className='container-fluid'>
 							<PeopleSection
 								data={peopleData}
-								liked={liked}
+								favlist={favList}
 								category='character'
 								handleClickLearnMore={handleClickLearnMore}
 								handleClickLike={handleClickLike}

@@ -11,8 +11,8 @@ export function Card(props) {
 		handleClickLike,
 		handleClickLearnMore,
 		category,
-		liked,
-		deleteElement
+		deleteElement,
+		favlist
 	} = props
 
 	return (
@@ -36,15 +36,17 @@ export function Card(props) {
 					</Link>
 					<button
 						className='like btn btn-outline-danger'
-						onClick={ liked ? (event) => handleClickLike(name, id, liked):(event)=> deleteElement(name,id)}>
-						{event ? (
-							<i className='fa-solid fa-heart'></i>
-						) : (
-							<i className='fa-regular fa-heart'></i>
-						)}
+						onClick={favlist[id].liked ? deleteElement() : handleClickLike()}>
 					</button>
 				</div>
 			</div>
 		</div>
 	)
 }
+
+
+// {favlist.liked ? (
+// 	<i className='fa-solid fa-heart'></i>
+// ) : (
+// 	
+// )}
